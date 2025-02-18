@@ -1,15 +1,18 @@
 import requests
+import pytest
 
-# Test 1: Validate successful response with HTTP code 200
-def test_valid_user_credentials():
+# Test 1: Test with valid username and password (expect HTTP 200)
+def test_valid_credentials():
     url = "http://127.0.0.1:8000/users/?username=admin&password=qwerty"
     response = requests.get(url)
-    # Check if the response code is 200
+    
+    # Verify that the response is HTTP code 200
     assert response.status_code == 200
 
-# Test 2: Validate unauthorized response with HTTP code 401
-def test_invalid_user_credentials():
+# Test 2: Test with valid username but incorrect password (expect HTTP 401)
+def test_invalid_credentials():
     url = "http://127.0.0.1:8000/users/?username=admin&password=admin"
     response = requests.get(url)
-    # Check if the response code is 401 (Unauthorized)
+    
+    # Verify that the response is HTTP code 401
     assert response.status_code == 401
